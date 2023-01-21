@@ -1,0 +1,30 @@
+﻿  Board.cpp
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(175,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(176,22): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(180,9): warning C4477: 'printf' : format string '%X' requires an argument of type 'unsigned int', but variadic argument 1 has type 'u64'
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(180,9): message : consider using '%llX' in the format string
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(180,9): message : consider using '%IX' in the format string
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(180,9): message : consider using '%I64X' in the format string
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(282,20): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(318,12): warning C4244: 'initializing': conversion from 'u64' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\Board.cpp(328,12): warning C4244: 'initializing': conversion from 'u64' to 'int', possible loss of data
+  Eval.cpp
+C:\Users\George Munyoro\source\repos\redtail\redtail\Eval.cpp(6,1): warning C4005: 'INFINITY': macro redefinition
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\ucrt\corecrt_math.h(88): message : see previous definition of 'INFINITY'
+C:\Users\George Munyoro\source\repos\redtail\redtail\Eval.cpp(11,19): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\Eval.cpp(16,121): warning C4244: 'return': conversion from '_Rep' to 'int', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\George Munyoro\source\repos\redtail\redtail\Eval.cpp(126,38): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  redtail.cpp
+  MoveGen.cpp
+  UCI.cpp
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(10,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(11,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(13,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(14,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Utils.cpp
+  Generating Code...
+LINK : fatal error LNK1104: cannot open file 'C:\Users\George Munyoro\source\repos\redtail\x64\Debug\redtail.exe'

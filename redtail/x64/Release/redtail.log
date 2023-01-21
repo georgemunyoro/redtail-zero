@@ -1,0 +1,11 @@
+﻿  UCI.cpp
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(11,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(12,40): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(14,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+C:\Users\George Munyoro\source\repos\redtail\redtail\UCI.cpp(15,42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  1 of 836 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    4 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  redtail.vcxproj -> C:\Users\George Munyoro\source\repos\redtail\x64\Release\redtail.exe
