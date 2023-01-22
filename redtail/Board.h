@@ -45,6 +45,7 @@ typedef struct {
     int flag;
     int score;
     int depth;
+    int move;
 } TT_ENTRY;
 
 typedef struct {
@@ -73,8 +74,14 @@ typedef struct
 typedef struct
 {
     PV_ENTRY* p_table;
-    u64 num_entries;
+    int num_entries;
 } PV_TABLE;
+
+typedef struct
+{
+    int cmove;
+    S_MOVE argmove[100];
+} PV_LINE;
 
 class Board
 {
@@ -113,6 +120,8 @@ public:
 	void draw();
     void clear_board();
     void make_move(int move);
+    void make_null_move();
+    void undo_null_move();
     void undo_last_move();
     int perft(int depth);
 
@@ -121,6 +130,7 @@ public:
     // Move Generation
     std::vector<S_MOVE> generate_pseudo_moves();
     std::vector<S_MOVE> generate_moves();
+    std::vector<S_MOVE> ordered_moves();
 
     std::string get_ref(int position);
     std::string get_move_ref(int move);
@@ -142,9 +152,11 @@ public:
     // int quiesce(int alpha, int beta, S_SEARCHINFO *info);
     int quiesce(int alpha, int beta);
     // int alpha_beta(int alpha, int beta, int depth, S_SEARCHINFO *info, bool do_null);
-    int alpha_beta(int alpha, int beta, int depth);
+    int alpha_beta(int alpha, int beta, int depth, bool do_null);
     int search_position(S_SEARCHINFO *info);
-    void clear_for_search(S_SEARCHINFO* info);
+    void clear_for_search();
+
+    S_SEARCHINFO search_info;
 
     u64 position_key();
 
@@ -154,14 +166,18 @@ public:
     int mvv_lva_scores[13][13];
     void init_mvv_lva();
 
+    static const int MAX_DEPTH = 100;
+
     // Principal Variation Table
 	const int PV_SIZE = 0x100000 * 5;
+
     PV_TABLE pv_table[1];
+    int pv_array[100];
+
     void init_pv_table();
     void clear_pv_table();
     void store_pv_move(int move);
     int probe_pv_table();
-    int pv_array[64];
     int get_pv_line(int depth);
 };
 

@@ -44,7 +44,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 					dest = pos + N + N;
 					if ((dest & 0x88) == 0 && floor(pos / 16) == 6) {
 						if (squares[dest] == Empty) {
-							moves.push_back({ (pos << 20) | ((pos + N + N) << 12) | (squares[pos] << 8) | (squares[pos + N + N] << 4) | 0, 0 });
+							moves.push_back({ (pos << 20) | ((pos + N + N) << 12) | (WhitePawn << 8) | (squares[pos + N + N] << 4) | 0, 0 });
 						}
 					}
 				}
@@ -53,7 +53,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			dest = pos + N + E;
 			if ((dest & 0x88) == 0) {
 				if (get_color(squares[pos + N + E]) == Black && ((pos + N + E) & 0x88) == 0) {
-					moves.push_back({ (pos << 20) | ((pos + N + E)) << 12 | (squares[pos] << 8) | (squares[pos + N + E] << 4) | 1, mvv_lva_scores[squares[pos + N + E]][WhitePawn]});
+					moves.push_back({ (pos << 20) | ((pos + N + E)) << 12 | (WhitePawn << 8) | (squares[pos + N + E] << 4) | 1, mvv_lva_scores[squares[pos + N + E]][WhitePawn]});
 				}
 			}
 
@@ -61,7 +61,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			if ((dest & 0x88) == 0)
 			{
 				if (get_color(squares[pos + N + W]) == Black && ((pos + N + W) & 0x88) == 0) {
-					moves.push_back({(pos << 20) | ((pos + N + W)) << 12 | (squares[pos] << 8) | (squares[pos + N + W] << 4) | 1, mvv_lva_scores[squares[pos + N + W]][WhitePawn]});
+					moves.push_back({(pos << 20) | ((pos + N + W)) << 12 | (WhitePawn << 8) | (squares[pos + N + W] << 4) | 1, mvv_lva_scores[squares[pos + N + W]][WhitePawn]});
 				}
 			}
 		}
@@ -75,7 +75,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 					dest = pos + S + S;
 					if ((dest & 0x88) == 0 && floor(pos / 16) == 1) {
 						if (squares[dest] == Empty) {
-							moves.push_back({ (pos << 20) | ((dest) << 12) | (squares[pos] << 8) | (squares[dest] << 4) | 0, 0 });
+							moves.push_back({ (pos << 20) | ((dest) << 12) | (BlackPawn << 8) | (squares[dest] << 4) | 0, 0 });
 						}
 					}
 				}
@@ -84,7 +84,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			dest = pos + S + E;
 			if ((dest & 0x88) == 0) {
 				if (get_color(squares[pos + S + E]) == White) {
-					moves.push_back({(pos << 20) | ((pos + S + E)) << 12 | (squares[pos] << 8) | (squares[pos + S + E] << 4) | 1, mvv_lva_scores[squares[pos + S + E]][BlackPawn]});
+					moves.push_back({(pos << 20) | ((pos + S + E)) << 12 | (BlackPawn << 8) | (squares[pos + S + E] << 4) | 1, mvv_lva_scores[squares[pos + S + E]][BlackPawn]});
 				}
 			}
 
@@ -92,7 +92,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			if ((dest & 0x88) == 0)
 			{
 				if (get_color(squares[pos + S + W]) == White) {
-					moves.push_back({(pos << 20) | ((pos + S + W)) << 12 | (squares[pos] << 8) | (squares[pos + S + W] << 4) | 1, mvv_lva_scores[squares[pos + S + W]][BlackPawn]});
+					moves.push_back({(pos << 20) | ((pos + S + W)) << 12 | (BlackPawn << 8) | (squares[pos + S + W] << 4) | 1, mvv_lva_scores[squares[pos + S + W]][BlackPawn]});
 				}
 			}
 		}
@@ -103,7 +103,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			{
 				int dest = pos + direction;
 				if ((dest & 0x88) == 0 && get_color(squares[dest]) != turn && !is_square_attacked(dest, ~turn)) {
-					moves.push_back({ (pos << 20) | ((dest)) << 12 | (squares[pos] << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece] });
+					moves.push_back({ (pos << 20) | ((dest)) << 12 | (piece << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece] });
 				}
 			}
 		}
@@ -114,7 +114,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			{
 				int dest = pos + direction;
 				if ((dest & 0x88) == 0 && get_color(squares[dest]) != turn) {
-					moves.push_back({(pos << 20) | ((dest)) << 12 | (squares[pos] << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
+					moves.push_back({(pos << 20) | ((dest)) << 12 | (piece << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
 				}
 			}
 		}
@@ -124,7 +124,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			for (int direction : RookDirections) {
 				int dest = pos + direction;
 				while ((dest & 0x88) == 0 && get_color(squares[dest]) != turn) {
-					moves.push_back({(pos << 20) | ((dest) << 12) | (squares[pos] << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
+					moves.push_back({(pos << 20) | ((dest) << 12) | (piece << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
 					if (squares[dest] != Empty) break;
 					dest += direction;
 				}
@@ -136,7 +136,7 @@ std::vector<S_MOVE> Board::generate_pseudo_moves()
 			for (int direction : BishopDirections) {
 				int dest = pos + direction;
 				while ((dest & 0x88) == 0 && get_color(squares[dest]) != turn) {
-					moves.push_back({(pos << 20) | ((dest) << 12) | (squares[pos] << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
+					moves.push_back({(pos << 20) | ((dest) << 12) | (piece << 8) | (squares[dest] << 4) | 0, mvv_lva_scores[squares[dest]][piece]});
 					if (squares[dest] != Empty) break;
 					dest += direction;
 				}

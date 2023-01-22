@@ -129,7 +129,8 @@ int main() {
 
 		else if (comm == "listmoves")
 		{
-			std::vector<S_MOVE> moves = board.generate_moves();
+			std::vector<S_MOVE> moves = board.ordered_moves();
+
 			for (S_MOVE move : moves)
 			{
 				board.make_move(move.move);
@@ -138,7 +139,7 @@ int main() {
 				// board.clear_for_search(&search_info);
 
 				// std::cout << board.get_move_ref(move.move) << " " << board.get_score() << " " << board.alpha_beta(-999999999, 999999999, 0) << std::endl;
-				std::cout << board.get_move_ref(move.move) << " " << move.score << std::endl;
+				std::cout << board.get_move_ref(move.move) << " " << move.score << " " << floor(((move.move >> 12) & 0xff) / 16) << std::endl;
 				board.undo_last_move();
 			}
 		}

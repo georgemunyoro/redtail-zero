@@ -205,13 +205,13 @@ std::string Board::get_move_ref(int move) {
 }
 
 void Board::make_move(int move) {
-	bool is_white_promotion = ((move >> 8) & 0xf) == WhitePawn && floor(((move >> 12) & 0xf) / 16) == 0;
-	bool is_black_promotion = ((move >> 8) & 0xf) == BlackPawn && floor(((move >> 12) & 0xf) / 16) == 7;
-
 	int result_piece = (move >> 8) & 0xf;
 
-	if (is_white_promotion) result_piece = WhiteQueen;
-	if (is_black_promotion) result_piece = BlackQueen;
+	// bool is_white_promotion = result_piece == WhitePawn && floor(((move >> 12) & 0xff) / 16) == 0;
+	// bool is_black_promotion = result_piece == BlackPawn && floor(((move >> 12) & 0xff) / 16) == 7;
+
+	// if (is_white_promotion) result_piece = WhiteQueen;
+	// else if (is_black_promotion) result_piece = BlackQueen;
 
 	move_history.push_back(move);
 	squares[(move >> 12) & 0xff] = result_piece;
@@ -227,6 +227,8 @@ void Board::make_move(int move) {
 	{
 		black_king_position = (move >> 12) & 0xff;
 	}
+
+	// ply++;
 }
 
 void Board::undo_last_move() {
@@ -235,6 +237,17 @@ void Board::undo_last_move() {
 	squares[(last_move >> 12) & 0xff] = (last_move >> 4) & 0xf;
 	move_history.pop_back();
 	switch_turn();
+	// --ply;
+}
+
+void Board::make_null_move() {
+	switch_turn();
+	ply++;
+}
+
+void Board::undo_null_move() {
+	switch_turn();
+	ply--;
 }
 
 int Board::perft(int depth) {
@@ -338,19 +351,20 @@ void Board::store_pv_move(int move)
 	pv_table->p_table[index].pos_key = position_key();
 }
 
-int Board::probe_pv_table()
-{
+int Board::probe_pv_table() {
 	int index = position_key() % pv_table->num_entries;
+
 	if (pv_table->p_table[index].pos_key == position_key())
 	{
 		return pv_table->p_table[index].move;
 	}
+
 	return 0;
 }
 
 int Board::get_pv_line(int depth)
 {
-	assert(depth < 64);
+	assert(depth < MAX_DEPTH);
 
 	int move = probe_pv_table();
 	int count = 0;
